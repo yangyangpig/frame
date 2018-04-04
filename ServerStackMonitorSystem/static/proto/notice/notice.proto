@@ -1,0 +1,66 @@
+syntax="proto2";
+
+package pgNotice;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message GetListRequest
+{
+      required int32 app = 1[(gogoproto.nullable) = false];
+      required int64 mid = 2[(gogoproto.nullable) = false];
+      optional string version = 3[(gogoproto.nullable) = false];
+      optional int64 hall_version = 4[(gogoproto.nullable) = false];
+      optional int64 cli_ver = 5[(gogoproto.nullable) = false];
+      optional int32 area_id = 6[(gogoproto.nullable) = false];
+}
+
+message GetListResData
+{
+    required int32 notice_id = 1[(gogoproto.nullable) = false];
+    required int32 notice_type = 2[(gogoproto.nullable) = false];
+    required int32 app_id = 3[(gogoproto.nullable) = false];
+    required int32 weight = 4[(gogoproto.nullable) = false];
+    required string title = 5[(gogoproto.nullable) = false];
+    required string content = 6[(gogoproto.nullable) = false];
+    required string start_time = 7[(gogoproto.nullable) = false];
+    required string end_time = 8[(gogoproto.nullable) = false];
+    optional GetListConditions conditions = 9[(gogoproto.nullable) = false];
+}
+
+message GetListConditions
+{
+    required int32 sendtype = 1[(gogoproto.nullable) = false];
+    required int32 poptype = 2[(gogoproto.nullable) = false];
+    required int32 islogined = 3[(gogoproto.nullable) = false];
+    required int32 week = 4[(gogoproto.nullable) = false];
+    required GetListPertime pertime = 5[(gogoproto.nullable) = false];
+}
+
+message GetListPertime
+{
+    required string stime = 1[(gogoproto.nullable) = false];
+    required string etime = 2[(gogoproto.nullable) = false];
+}
+
+message GetListResponse
+{
+    required int32 isrefresh = 1[(gogoproto.nullable) = false];
+    required int32 idlist = 2[(gogoproto.nullable) = false];
+    required int64 svr_ver = 3[(gogoproto.nullable) = false];
+    required int64 svrtime = 4[(gogoproto.nullable) = false];
+    required GetListResData Data = 5[(gogoproto.nullable) = false];
+}
+
+

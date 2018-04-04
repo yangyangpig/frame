@@ -1,0 +1,96 @@
+syntax="proto2";
+
+package pgPay;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+
+// 商城配置
+message ConfigRequest
+{
+	required 	int64			mid = 1[(gogoproto.nullable) = false];		// 用户ID
+}
+
+message ConfigResponse
+{
+	required 	int32 			status = 1[(gogoproto.nullable) = false];	// 请求状态
+	required 	string 			msg = 2[(gogoproto.nullable) = false];		// 提示语
+	optional 	ConfigRespData 	data = 3[(gogoproto.nullable) = false];		// 返回数据
+}
+
+message ConfigRespData
+{
+	repeated	GoodsRespData	goods = 1[(gogoproto.nullable) = false];	// 商品配置
+	repeated	PayRespData		pay = 2[(gogoproto.nullable) = false];		// 支付方式配置
+}
+
+message GoodsRespData
+{
+	optional	int32			gid = 1[(gogoproto.nullable) = false];		// 商品ID
+	optional	float			price = 2[(gogoproto.nullable) = false];	// 商品价格
+	optional	string			icon = 3[(gogoproto.nullable) = false];		// 商品图片
+	optional	string			name = 4[(gogoproto.nullable) = false];		// 商品名称
+	optional	int32			ptype = 5[(gogoproto.nullable) = false];	// 商品类型，也是物品id
+	optional	int32			number = 6[(gogoproto.nullable) = false];	// 商品数量
+	optional	int32			order = 7[(gogoproto.nullable) = false];	// 商品排序
+}
+
+// 支付方式配置
+message PayRespData
+{
+	optional	int32			pmodel = 1[(gogoproto.nullable) = false];
+}
+
+// 下单
+message OrderRequest
+{
+required 	int64			mid = 1[(gogoproto.nullable) = false];		// 用户ID
+required	int32			pmodel = 2[(gogoproto.nullable) = false];	// 支付方式
+optional	float			price = 3[(gogoproto.nullable) = false];
+optional	int32			ptype = 4[(gogoproto.nullable) = false];
+optional	int32			number = 5[(gogoproto.nullable) = false];
+required	int32			gid = 6[(gogoproto.nullable) = false]; //
+}
+
+message OrderResponse
+{
+required 	int32 			status = 1[(gogoproto.nullable) = false];	// 请求状态
+required 	string 			msg = 2[(gogoproto.nullable) = false];		// 提示语
+optional 	OrderInfo 		data = 3[(gogoproto.nullable) = false];		// 返回数据
+}
+
+message OrderInfo
+{
+optional	string 		pid = 1[(gogoproto.nullable) = false];
+optional	string 		order = 2[(gogoproto.nullable) = false];
+optional	string 		partnerid = 3[(gogoproto.nullable) = false];
+optional	string  	prepayid = 4[(gogoproto.nullable) = false];
+optional	string  	noncestr = 5[(gogoproto.nullable) = false];
+optional	int64  		timestamp = 6[(gogoproto.nullable) = false];
+optional	string 		package = 7[(gogoproto.nullable) = false];
+optional	string 		sign = 8[(gogoproto.nullable) = false];
+optional    string      all = 9[(gogoproto.nullable) = false];
+optional	string		appstoreid = 10[(gogoproto.nullable) = false];
+}
+
+message RepostRequest
+{
+required 	string 			pid = 1[(gogoproto.nullable) = false];	// 请求状态
+required 	string 			pdealno = 2[(gogoproto.nullable) = false];		// 提示语
+required 	string 			receipt = 3[(gogoproto.nullable) = false];		// 返回数据
+required	string			bundleId = 4[(gogoproto.nullable) = false];
+required	int64			mid = 5[(gogoproto.nullable) = false];
+optional	int32			sandbox = 6[(gogoproto.nullable) = false];
+}

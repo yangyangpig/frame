@@ -1,0 +1,64 @@
+syntax="proto2";
+
+package config;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message ConfigRequest
+{
+    required int32 s1 = 1[(gogoproto.nullable) = false];
+    required int32 s2 = 2[(gogoproto.nullable) = false];
+    required int64 mid = 3[(gogoproto.nullable) = false];
+    required string apk_ver = 4[(gogoproto.nullable) = false];
+    required int64 hall_ver = 5[(gogoproto.nullable) = false];
+    required int32 appid = 6[(gogoproto.nullable) = false];
+    required int32 region = 7[(gogoproto.nullable) = false];
+}
+
+message RegionItem
+{
+    required int32 id = 1[(gogoproto.nullable) = false];
+    required string content = 2[(gogoproto.nullable) = false];
+}
+
+message RegionResp
+{
+    required int32 status = 1[(gogoproto.nullable) = false];
+    required RegionItem data = 2[(gogoproto.nullable) = false];
+}
+
+message BpidItem
+{
+    required int32 bid = 1[(gogoproto.nullable) = false];
+    required string content = 2[(gogoproto.nullable) = false];
+}
+
+message BpidResp
+{
+    required int32 status = 1[(gogoproto.nullable) = false];
+    required BpidItem data = 2[(gogoproto.nullable) = false];
+}
+
+message ConfigItem
+{
+    required RegionResp cmd1 = 1[(gogoproto.nullable) = false];
+    required BpidResp cmd2 = 2[(gogoproto.nullable) = false];
+}
+
+message ConfigResponse
+{
+    required ConfigItem s1 = 1[(gogoproto.nullable) = false];
+    required ConfigItem s2 = 2[(gogoproto.nullable) = false];
+}

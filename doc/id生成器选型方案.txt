@@ -1,0 +1,7 @@
+参考：https://tech.meituan.com/MT_Leaf.html
+选择：leaf_segment
+
+1、做成rpc服务；
+2、单次step 1000
+3、多实例（多svrid）
+4、双buffer

@@ -1,0 +1,45 @@
+[DEBUG]2018/03/07 10:02:11.159072 rpccall.go:132: -----1012 1 1pgNotice192.168.202.257000-----
+[DEBUG]2018/03/07 10:02:11.162169 rpccall.go:151: Register info is:   svrtype =1012 |svrid =1 |version = 1 |svrname =pgNotice |funcs = [NoticeList]|netIp =192.168.202.25|netPort = 7000
+[DEBUG]2018/03/07 10:02:11.162309 netImpl.go:73: 192.168.202.25:7000
+[DEBUG]2018/03/07 10:02:11.163903 netImpl.go:234: local addr:10.0.2.15:55735
+[DEBUG]2018/03/07 10:02:11.165362 rpc_client.go:561: server get a Packet cmd: 106
+[DEBUG]2018/03/07 10:02:11.165458 rpc_client.go:676: Register succeed!!! returncode is................. 0
+[DEBUG]2018/03/07 10:02:11.165531 rpc_client.go:472: registerFuncs send info :{513 0 -1 6 1 1012 1 0 0 0 [1 2]} {0xc42008ad38 0xc42008ad48 [NoticeList] []}
+[DEBUG]2018/03/07 10:02:11.181895 rpc_client.go:561: server get a Packet cmd: 202
+[DEBUG]2018/03/07 10:02:11.182049 rpc_client.go:702: processRegisterFuncsResp succeed!!! returncode is................. 0
+[DEBUG]2018/03/07 10:02:34.338880 rpc_client.go:561: server get a Packet cmd: 104
+[DEBUG]2018/03/07 10:02:34.339153 rpc_client.go:656: Service need deleted!!! returncode is................. 8
+[DEBUG]2018/03/07 10:02:34.339234 rpc_client.go:1144: rpcclient Close
+.168.202.25|netPort = 7000
+[DEBUG]2018/03/07 10:02:34.335604 netImpl.go:73: 192.168.202.25:7000
+[DEBUG]2018/03/07 10:02:34.337369 netImpl.go:234: local addr:10.0.2.15:44009
+[DEBUG]2018/03/07 10:02:34.342453 go_timer.go:189: timer is reach!2018-03-07T10:02:34+08:00
+[DEBUG]2018/03/07 10:02:34.344533 rpc_client.go:561: server get a Packet cmd: 106
+[DEBUG]2018/03/07 10:02:34.344666 rpc_client.go:676: Register succeed!!! returncode is................. 0
+[DEBUG]2018/03/07 10:02:34.344766 rpc_client.go:472: registerFuncs send info :{513 0 -1 6 1 1012 1 0 0 0 [1 2 3]} {0xc42008a4f8 0xc42008a508 [default] []}
+[DEBUG]2018/03/07 10:02:34.344845 szmq.go:148: szmqpushclient.Ncstatus = 0
+[DEBUG]2018/03/07 10:02:34.345115 client.go:50: LaunchRpcClient succeed!!!
+[DEBUG]2018/03/07 10:02:34.359367 rpc_client.go:561: server get a Packet cmd: 202
+[DEBUG]2018/03/07 10:02:34.359474 rpc_client.go:702: processRegisterFuncsResp succeed!!! returncode is................. 0
+[DEBUG]2018/03/07 10:02:34.390520 szk.go:292: szk.go v2ids: map[1:[1]] svrtype: 1012
+[DEBUG]2018/03/07 10:02:34.390785 rpc_client.go:765: 请求目标dstsvrtype: 1012 请求目标dstsvrid: 1
+[DEBUG]2018/03/07 10:02:34.391395 rpc_client.go:316: addReqRecord, seq = 1
+[DEBUG]2018/03/07 10:02:34.393151 rpc_client.go:561: server get a Packet cmd: 109
+[DEBUG]2018/03/07 10:02:34.393492 client.go:16: [rpchead: len=33 seq=1 methodname=pgNotice.NoticeList,sstype=1012, ssvrid=1, smtid=0]
+[DEBUG]2018/03/07 10:02:34.393625 client.go:17: [8 0 16 153 137 122 26 0 32 0 40 0 48 0]
+[DEBUG]2018/03/07 10:02:34.395673 rpc_client.go:561: server get a Packet cmd: 10a
+[DEBUG]2018/03/07 10:02:34.395822 rpc_client.go:301: deleteReqRecord, seq = 1
+[DEBUG]2018/03/07 10:02:34.395933 rpc_reqtracker.go:122: rrr.respchan <- recresp
+[DEBUG]2018/03/07 10:02:34.396049 rpc_reqtracker.go:124: rrr.timeroo.Close()
+[DEBUG]2018/03/07 10:02:34.396142 rpc_client.go:808: ------------------------------------seq=1,returncode=0
+head = rpchead: len=33 seq=1 methodname=pgNotice.NoticeList
+body = hi I'm Server return your data
+[DEBUG]2018/03/07 10:02:34.396211 client.go:63: rpc response = seq=1,returncode=0
+head = rpchead: len=33 seq=1 methodname=pgNotice.NoticeList
+body = hi I'm Server return your data
+[DEBUG]2018/03/07 10:02:34.396363 client.go:75: return value  = &GetListResponse{Isrefresh:0,Idlist:0,SvrVer:0,Svrtime:73,Data:GetListResData{NoticeId:0,NoticeType:0,AppId:0,Weight:0,Title:,Content:,StartTime:,EndTime:,Conditions:GetListConditions{Sendtype:0,Poptype:0,Islogined:0,Week:0,Pertime:GetListPertime{Stime:,Etime:,XXX_unrecognized:[],},XXX_unrecognized:[],},XXX_unrecognized:[],},XXX_unrecognized:[104 105],}
+[DEBUG]2018/03/07 10:02:34.396462 go_timer.go:189: timer is reach!2018-03-07T10:02:34+08:00
+[DEBUG]2018/03/07 10:03:04.345582 go_timer.go:189: timer is reach!2018-03-07T10:03:04+08:00
+[DEBUG]2018/03/07 10:03:04.345701 rpc_client.go:736: send heart request
+[DEBUG]2018/03/07 10:03:04.347006 rpc_client.go:561: server get a Packet cmd: 105
+[DEBUG]2018/03/07 10:03:04.347110 rpc_client.go:714: receive heart beat response

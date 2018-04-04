@@ -1,0 +1,47 @@
+
+syntax="proto2";
+
+package Report;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message CommonRequest
+{
+	optional int32		 _specialFlag_ = 1[(gogoproto.nullable) = false];;
+	optional string		 _specialString_ = 2[(gogoproto.nullable) = false];;
+}
+
+message DevicesRequest
+{
+	optional string		 platform = 1[(gogoproto.nullable) = false];
+	optional string		 osversion =2[(gogoproto.nullable) = false];;
+	optional string		 deviceId = 3[(gogoproto.nullable) = false];;
+	optional string		 identifier = 4[(gogoproto.nullable) = false];;
+	optional string		 brand = 5[(gogoproto.nullable) = false];;
+	optional string		 bundleVersion = 6[(gogoproto.nullable) = false];;
+	optional string		 bundleShortVersion = 7[(gogoproto.nullable) = false];;
+	optional string		 serialId = 8[(gogoproto.nullable) = false];;
+	optional string		 deviceName = 9[(gogoproto.nullable) = false];;
+	optional string		 model = 10[(gogoproto.nullable) = false];;
+	optional string		 manufacturer = 11[(gogoproto.nullable) = false];;
+	optional string		 locale = 12[(gogoproto.nullable) = false];;
+	optional string		 countrt = 13[(gogoproto.nullable) = false];;
+	optional string		 timezone = 14[(gogoproto.nullable) = false];;
+}
+
+message DevicesResponse
+{
+	optional string		 result  = 1[(gogoproto.nullable) = false];;
+}

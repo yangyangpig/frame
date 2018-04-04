@@ -1,0 +1,79 @@
+syntax="proto2";
+
+package pgUser;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+//写入用户基本信息
+message InsertUserInfoRequest
+{
+    optional int64 cid = 1[(gogoproto.nullable) = false];
+    optional string nick = 2[(gogoproto.nullable) = false]; //昵称
+    optional string city = 3[(gogoproto.nullable) = false]; //城市
+    optional int32 sex = 4[(gogoproto.nullable) = false]; //性别
+    optional string sign = 5[(gogoproto.nullable) = false]; //签名
+    optional string icon = 6[(gogoproto.nullable) = false]; //头像小图
+    optional string iconBig = 7[(gogoproto.nullable) = false]; //头像大图
+    optional string phone = 8[(gogoproto.nullable) = false]; //手机号
+}
+
+message InsertUserInfoResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false]; //0成功 >=1失败
+}
+
+//修改用户基本信息
+message ModifyUserInfoRequest
+{
+    optional int64 mid = 1[(gogoproto.nullable) = false];
+    optional string nick = 2[(gogoproto.nullable) = false]; //昵称
+    optional string city = 3[(gogoproto.nullable) = false]; //城市
+    optional int32 sex = 4[(gogoproto.nullable) = false]; //性别
+    optional string sign = 5[(gogoproto.nullable) = false]; //签名
+    optional string icon = 6[(gogoproto.nullable) = false]; //头像小图
+    optional string iconBig = 7[(gogoproto.nullable) = false]; //头像大图
+    optional string phone = 8[(gogoproto.nullable) = false]; //手机号
+    optional string iconId = 9[(gogoproto.nullable) = false]; //默认头像ID
+}
+
+message ModifyUserInfoResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false]; //0成功 >=1失败
+}
+
+//获取用户基本信息
+message GetUserInfoRequest
+{
+    optional int64 mid = 1[(gogoproto.nullable) = false];
+}
+
+message GetUserInfoRespData {
+    optional string nick = 1[(gogoproto.nullable) = false];
+    optional int32 sex = 2[(gogoproto.nullable) = false];
+    optional string icon = 3[(gogoproto.nullable) = false];
+    optional string icon_big = 4[(gogoproto.nullable) = false];
+    optional string city = 5[(gogoproto.nullable) = false];
+    optional string sign = 6[(gogoproto.nullable) = false];
+    optional int32 status = 7[(gogoproto.nullable) = false];
+    optional string iconId = 8[(gogoproto.nullable) = false];
+    optional string phone = 9[(gogoproto.nullable) = false];
+}
+
+message GetUserInfoResponse
+{
+    optional int32 status=1[(gogoproto.nullable) = false];
+    optional string msg=2[(gogoproto.nullable) = false];
+    optional GetUserInfoRespData data=3[(gogoproto.nullable) = false];
+}

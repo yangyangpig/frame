@@ -1,0 +1,37 @@
+引入szmq的客户端：
+import (
+	"framework/rpcclient/szmq" //zmq日志操作
+)
+
+发起zmq上报：
+go szmq.Logger.WriteNormalLog("test", "hello,the log comes from arith!")	//WriteNormalLog为普通日志上报
+
+
+
+
+
+真实示例：
+//rpc响应时间上报zmq
+	var dcrpcmonitor szmq.DcRpcMonitor
+	nowtime := time.Now().UnixNano()
+	var diffMicroSeconds int64 = (nowtime - req.Inputtime)
+	diffMicroSeconds = diffMicroSeconds / 1e3 //此处的结果就是整数了！
+	dcrpcmonitor.Channel_id = ""
+	dcrpcmonitor.Act_time = time.Now().Unix()
+	dcrpcmonitor.Server_name = fmt.Sprint(rpcclient.svrtype)
+	dcrpcmonitor.Server_id = fmt.Sprint(rpcclient.svrid)
+	dcrpcmonitor.Func_name = string(req.Rpchead.MethodName)
+	dcrpcmonitor.Typ = ""
+	dcrpcmonitor.Exec_microsecond = diffMicroSeconds
+	dcrpcmonitor.Ext_data = ""
+	databytes, _ := json.Marshal(dcrpcmonitor)
+
+	go rpccall.WriteNormalLog("monitor_rpc", string(databytes))
+	
+	
+参考：
+上报格式定义有大数据方与业务协商： http://svn.oa.com:24399/flames/java/doc/hive_table.md
+
+
+
+

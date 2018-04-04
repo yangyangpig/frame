@@ -1,0 +1,40 @@
+DEBUG2018/02/27 16:48:32.898198 service.go:116: Register info is:   svrtype =1003 |svrid =1 |version = 4 |svrname =PGUser |funcs = [Get Modify Add]|netIp =192.168.202.25|netPort = 7000
+DEBUG2018/02/27 16:48:32.899878 netImpl.go:73: 192.168.202.25:7000
+DEBUG2018/02/27 16:48:32.901482 netImpl.go:229: local addr:10.0.2.15:45385
+DEBUG2018/02/27 16:48:32.902983 rpc_client.go:541: server get a Packet cmd: 106
+DEBUG2018/02/27 16:48:32.903060 rpc_client.go:656: Register succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:48:32.903130 rpc_client.go:469: registerFuncs send info :{513 0 -1 6 1 1003 1 0 0 0 [1 2]} {0xc42008abd8 0xc42008abe8 [Get Modify Add] []}
+DEBUG2018/02/27 16:48:32.925431 rpc_client.go:541: server get a Packet cmd: 202
+DEBUG2018/02/27 16:48:32.925925 rpc_client.go:682: processRegisterFuncsResp succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:49:26.003648 service.go:116: Register info is:   svrtype =1003 |svrid =1 |version = 4 |svrname =PGUser |funcs = [Get Modify Add]|netIp =192.168.202.25|netPort = 7000
+DEBUG2018/02/27 16:49:26.006820 netImpl.go:73: 192.168.202.25:7000
+DEBUG2018/02/27 16:49:26.008139 netImpl.go:229: local addr:10.0.2.15:50975
+DEBUG2018/02/27 16:49:26.010111 rpc_client.go:541: server get a Packet cmd: 106
+DEBUG2018/02/27 16:49:26.010252 rpc_client.go:656: Register succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:49:26.010326 rpc_client.go:469: registerFuncs send info :{513 0 -1 6 1 1003 1 0 0 0 [1 2]} {0xc42008abd8 0xc42008abe8 [Get Modify Add] []}
+DEBUG2018/02/27 16:49:26.023514 rpc_client.go:541: server get a Packet cmd: 202
+DEBUG2018/02/27 16:49:26.023786 rpc_client.go:682: processRegisterFuncsResp succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:49:56.011145 go_timer.go:189: timer is reach!2018-02-27T16:49:56+08:00
+DEBUG2018/02/27 16:49:56.012202 rpc_client.go:716: send heat beat
+DEBUG2018/02/27 16:49:56.015197 rpc_client.go:541: server get a Packet cmd: 105
+DEBUG2018/02/27 16:49:56.016225 rpc_client.go:694: receive heart beat response
+DEBUG2018/02/27 16:49:57.478283 netImpl.go:73: 192.168.202.25:7000
+DEBUG2018/02/27 16:49:57.496323 netImpl.go:229: local addr:10.0.2.15:37460
+DEBUG2018/02/27 16:49:57.498252 rpc_client.go:541: server get a Packet cmd: 106
+DEBUG2018/02/27 16:49:57.498343 rpc_client.go:656: Register succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:49:57.498427 rpc_client.go:469: registerFuncs send info :{513 0 -1 6 1 1900 1 0 0 0 [1 2 3]} {0xc42008a4f8 0xc42008a508 [] []}
+DEBUG2018/02/27 16:49:57.498500 szmq.go:148: szmqpushclient.Ncstatus = 0
+DEBUG2018/02/27 16:49:57.498770 client.go:51: LaunchRpcClient succeed!!!
+DEBUG2018/02/27 16:49:57.510809 rpc_client.go:541: server get a Packet cmd: 202
+DEBUG2018/02/27 16:49:57.511883 rpc_client.go:682: processRegisterFuncsResp succeed!!! returncode is................. 0
+DEBUG2018/02/27 16:49:57.534334 rpccall.go:144: +++++++++++++++++++++1003 map[4:[1]]
+DEBUG2018/02/27 16:49:57.534896 rpc_client.go:313: addReqRecord, seq = 1
+DEBUG2018/02/27 16:49:57.536353 rpc_client.go:541: server get a Packet cmd: 109
+DEBUG2018/02/27 16:49:57.871074 service.go:54: ===mydispatchGet
+DEBUG2018/02/27 16:49:57.871587 szmq.go:148: szmqpushclient.Ncstatus = 0
+DEBUG2018/02/27 16:49:57.873838 rpc_client.go:541: server get a Packet cmd: 10a
+DEBUG2018/02/27 16:49:57.873988 rpc_client.go:298: deleteReqRecord, seq = 1
+DEBUG2018/02/27 16:49:57.874136 rpc_reqtracker.go:122: rrr.respchan <- recresp
+DEBUG2018/02/27 16:49:57.874216 rpc_reqtracker.go:124: rrr.timeroo.Close()
+DEBUG2018/02/27 16:49:57.874333 client.go:75: return value  = &GetUserInfoResponse{Status:0,Msg:,Data:UserInfo{Mid:2000253,AppId:203001,RegTime:0,LoginTime:0,Status:0,VipTime:0,VipLevel:0,PlatformId:,PlatformType:0,Nick:A3268F1A,Sex:0,Icon:,IconBig:,Hometown:,City:中国,Email:,Phone:,Realname:,Idcard:,OrgApp:0,OrgChannel:0,ChannelId:0,Timeout:0,Bagvol:0,Ispay:0,FirstMatch:0,FastMatch:0,Version:,IsSet:0,PartnerInfo:0,XXX_unrecognized:[],},XXX_unrecognized:[],}
+DEBUG2018/02/27 16:49:57.874547 go_timer.go:189: timer is reach!2018-02-27T16:49:57+08:00

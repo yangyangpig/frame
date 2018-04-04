@@ -1,0 +1,101 @@
+syntax="proto2";
+
+package pgLogin;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+//登录注册
+message LoginReqPhone
+{
+    optional string phone = 1[(gogoproto.nullable) = false]; //手机号
+    optional string captcha = 2[(gogoproto.nullable) = false]; //验证码
+    optional string pwd = 3[(gogoproto.nullable) = false]; //密码
+    optional string bid = 4[(gogoproto.nullable) = false]; //手机用户唯一标识
+    optional string access_token = 5[(gogoproto.nullable) = false]; //访问令牌
+}
+
+message LoginReqWechat
+{
+    optional string union_id = 1[(gogoproto.nullable) = false]; //微信全局唯一标识
+    optional string open_id = 2[(gogoproto.nullable) = false]; //微信应用内唯一标识
+    optional string access_token = 3[(gogoproto.nullable) = false]; //访问令牌
+}
+
+message LoginRequest
+{
+    optional int32 app_id = 1[(gogoproto.nullable) = false]; //应用id
+    optional string apk_ver = 2[(gogoproto.nullable) = false]; //apk版本
+    optional int32 hall_ver = 3[(gogoproto.nullable) = false]; //大厅版本
+    optional int32 login_type = 4[(gogoproto.nullable) = false]; //登录类型
+    optional string guid = 5[(gogoproto.nullable) = false]; //设备唯一标识
+    optional LoginReqPhone phoneParam = 6[(gogoproto.nullable) = false]; //手机登录参数
+    optional LoginReqWechat wechatParam = 7[(gogoproto.nullable) = false];//微信登录参数
+}
+
+message LoginRespPhone {
+    optional string bid = 1[(gogoproto.nullable) = false]; //博雅通行证bid
+    optional string access_token = 2[(gogoproto.nullable) = false]; //访问令牌
+    optional string phone = 3[(gogoproto.nullable) = false]; //手机号
+}
+
+message LoginRespWechat {
+    optional string union_id = 1[(gogoproto.nullable) = false]; //微信unionid
+}
+
+//返回用户信息
+message LoginRespUserInfo {
+    optional string nick = 1[(gogoproto.nullable) = false];
+    optional int32 sex = 2[(gogoproto.nullable) = false];
+    optional string icon = 3[(gogoproto.nullable) = false];
+}
+
+//返回用户资产
+message LoginRespProperty{
+    optional int64 silver = 1[(gogoproto.nullable) = false]; //银币
+    optional int64 bullion = 2[(gogoproto.nullable) = false]; //金条
+}
+
+message LoginRespData
+{
+    optional int64 mid = 1[(gogoproto.nullable) = false]; //用户id
+    optional int64 cid = 2[(gogoproto.nullable) = false]; //用户公共id
+    optional string ssid = 3[(gogoproto.nullable) = false]; //在线状态标识
+    optional int32 login_type = 4[(gogoproto.nullable) = false]; //登录类型
+    optional LoginRespPhone phoneParam = 5[(gogoproto.nullable) = false];
+    optional LoginRespUserInfo userInfoParam = 6[(gogoproto.nullable) = false]; //用户信息
+    optional LoginRespProperty userPropertyParam = 7[(gogoproto.nullable) = false]; //用户资产
+    optional LoginRespWechat wechatParam = 8[(gogoproto.nullable) = false];
+}
+
+message LoginResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];  //状态 0 成功 >=1失败
+    optional string msg = 2[(gogoproto.nullable) = false];
+    optional LoginRespData data = 3[(gogoproto.nullable) = false];
+}
+
+//重置密码
+message ResetPwdRequest
+{
+    optional string phone = 1[(gogoproto.nullable) = false]; //手机号
+    optional string captcha = 2[(gogoproto.nullable) = false]; //验证码
+    optional string pwd = 3[(gogoproto.nullable) = false]; //密码
+}
+
+message ResetPwdResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];  //状态 0 修改成功 1 修改失败
+    optional string msg = 2[(gogoproto.nullable) = false];  //原因
+}

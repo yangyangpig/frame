@@ -1,0 +1,60 @@
+方案
+【原则】：zk中保存最新的两个版本的服务
+【原则】：服务升级不应该删掉提供rpc服务的方法！
+
+一、rpc使用zk数据结构说明：
+	 create /rpc/arith 					null																	//父节点存null，也可以存描述信息
+	 create /rpc/arith/typeandids 		{"Typ":12,"Ver":14,"Ids":[26,27],"PrevVer":13,"PrevIds":[23,24]}		//Typ表示svrtype；Ver表示当前最高的版本；Ids：最高版本的实例ids；PrevVer：上个版本号；PrevIds上个版本的实例
+	 create /rpc/arith/funcs/13 			["Add","Multiply","Division"]
+	 create /rpc/arith/funcs/14 			["Add","Multiply","Division"]
+	
+ 
+二、过程分析：
+	2-1、假如有一个arith服务启动，其中有两个方法Add、Multiply.	svrtype为12，svrid有26，版本14
+	rpc在向Net层完成了注册之后，向zk写入数据，此时zk数据如下：
+	 create /rpc/arith 					null									//父节点存null，也可以存描述信息
+	 create /rpc/arith/typeandids 		{"Typ":12,"Ver":14,"Ids":[26],"PrevVer":0,"PrevIds":[]}		//此处存svrtype和svrid和最新svr的版本号（12为svrtype，26/27为svrid，14为版本号）
+	 create /rpc/arith/funcs/14 			["Add","Multiply"]	
+	 
+	 
+	2-2、平行添加一个arith服务（svrtype为12，svrid有27，版本14），此时zk数据如下
+	 create /rpc/arith 					null
+	 create /rpc/arith/typeandids 		{"Typ":12,"Ver":14,"Ids":[26,27],"PrevVer":0,"PrevIds":[]}
+	 create /rpc/arith/funcs/14 			["Add","Multiply"]
+	 
+	 
+	2-3、版本14的arith服务有更新，修改了Add方法，修改了Multiply方法，新增了Division方法，就起一个新的arith（svrtype为12，svrid为28，版本15），此时zk数据如下
+	 create /rpc/arith 					null									
+	 create /rpc/arith/typeandids 		{"Typ":12,"Ver":15,"Ids":[28],"PrevVer":14,"PrevIds":[26,27]}
+	 create /rpc/arith/funcs/14 			["Add","Multiply"]
+	 create /rpc/arith/funcs/15 			["Add","Multiply","Division"]
+	 
+
+三、rpc监听：
+	当某个rpc（小Y）用到了arith服务的时候，开启连接zk（连接复用），获取zk数据，并存入本地内存，同时开启对这一类服务的监听（监听/rpc/arith/typeandids节点），只要监听的节点数据发生了变化就更新本地内存！
+
+四、svrtype和svrid选择：
+	4-1、无状态的服务每次随机的从本地内存的ids中 （内存没有时从zk加载进来） 随机选择一个svrid【本地内存存svrtype、svrids、funcs信息】
+	4-2、有状态的服务获取svrid的原则相似，但是在本地内存（也可能是某内存服务中）会存储一个自身唯一标识（如mid）与svrid的映射表【存svrtype、svrids、funcs信息 以及mid与svrid映射关系】
+	4-3、上述4-2与4-1的一个区别在于：有状态的要在某处多存一个状态映射关系！【本质上来说：是不是有状态跟zk没关系】
+
+五、情景分析：
+	
+	5-1、无状态服务水平扩展情况，同版本实例添加后调用方就会监控到，并更新投入使用！
+	5-2、无状态服务 升级的情况，高版本实例添加后，调用方就不再使用老实例了，全部都使用新实例！（Q：本来要起20个新服务的，但是只起来了一个，此时的请求都堆到这一个上面来了。。。类nginx的热重启）
+	5-3、有状态服务水平扩展情况：TODO
+	5-4、有状态服务 升级的情况：TODO
+	
+	5-5、灰度：根据服务数量相似性的规律，可以用如下规则选择实例，以应对灰度的过程！
+		1、当新版本的实例数量少于老的实例数量时，把新的和老的一起投入使用！
+		2、当新版本的实例数量大于等于老的实例数量时，只选择新的实例投入使用！（所以在新的实例没有完全投入使用前，不要轻易干掉老的）
+	5-6、回滚：
+		方法1、用老的代码+新的版本号，顶替掉有问题的服务！（新实例数量大于等于有问题实例数量时即可完成回滚！）
+		方法2、人为清空有问题服务的zk数据，然后再启动老的服务！
+
+备注：
+	1、此处rpc端不从zk中去获取groupid
+	2、节点更新顺序：先更新/rpc/arith/funcs下的节点，成功之后再更新/rpc/arith/typeandids节点！
+	3、相同的svrtype和svrid不允许被替换！
+	
+	

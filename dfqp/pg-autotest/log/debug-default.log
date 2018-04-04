@@ -1,0 +1,2 @@
+[DEBUG]2018/03/19 19:40:45.113882 netImpl.go:73: 192.168.202.25:7000
+[DEBUG]2018/03/19 19:40:45.118496 rpc_client.go:475: registerFuncs send info :{513 0 -1 6 1 1997 1 0 0 0 [1]} {0xc42008a398 0xc42008a3a8 [default] []}

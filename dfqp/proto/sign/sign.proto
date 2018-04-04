@@ -1,0 +1,58 @@
+syntax="proto2";
+
+package pgSign;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// GetSigninInfos 请求参数
+message GetSigninInfosRequest
+{
+    required    int64   mid          = 1[(gogoproto.nullable) = false];
+}
+
+// GetSigninInfos 响应信息
+message GetSigninInfosResponse
+{
+     map<string, ContinueData> continue_infos = 1[(gogoproto.nullable) = false];
+     optional   TodayData today_infos         = 2[(gogoproto.nullable) = false];
+}
+
+message ContinueData
+{
+    required    int32    day    = 1[(gogoproto.nullable) = false]; // 连续签到天数
+    required    int32    type   = 2[(gogoproto.nullable) = false]; // 奖励类型
+    required    int32    num    = 3[(gogoproto.nullable) = false]; // 奖励数目
+    required    string   icon   = 4[(gogoproto.nullable) = false]; // 图片地址
+}
+
+message TodayData
+{
+    required    int32    type   = 1[(gogoproto.nullable) = false]; // 奖励类型
+    required    int32    num    = 2[(gogoproto.nullable) = false]; // 奖励数目
+    required    int32    icon   = 3[(gogoproto.nullable) = false]; // 图片地址
+}
+
+// Signin 请求参数
+message SigninRequest
+{
+    required    int64   mid          = 1[(gogoproto.nullable) = false];
+    required    int32   day          = 2[(gogoproto.nullable) = false];
+}
+
+// Signin 响应信息
+message SigninResponse
+{
+    required    int32   status  = 1[(gogoproto.nullable) = false];
+}

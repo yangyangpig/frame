@@ -1,0 +1,48 @@
+syntax="proto2";
+
+package pgConfig;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message ConfigRequest
+{
+    required int32 s1 = 1[(gogoproto.nullable) = false];
+    required int32 s2 = 2[(gogoproto.nullable) = false];
+    required int64 mid = 3[(gogoproto.nullable) = false];
+    required string apk_ver = 4[(gogoproto.nullable) = false];
+    required int64 hall_ver = 5[(gogoproto.nullable) = false];
+    required int32 appid = 6[(gogoproto.nullable) = false];
+    required int32 region = 7[(gogoproto.nullable) = false];
+}
+
+message AccessDomainResp {
+    optional int32 status = 1[(gogoproto.nullable) = false];
+    optional string data = 2[(gogoproto.nullable) = false];
+}
+
+message ConfigS1
+{
+    optional AccessDomainResp cmd1 = 1[(gogoproto.nullable) = false];
+}
+
+message ConfigFlag
+{
+    repeated string s1 = 1;
+}
+
+message ConfigResponse {
+    optional ConfigS1 s1 = 1 [(gogoproto.nullable) = false];
+    optional ConfigFlag flag = 2[(gogoproto.nullable) = false];
+}

@@ -1,0 +1,55 @@
+syntax="proto2";
+
+package pgUserRelated;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message UserRelatedRequest
+{
+    optional int64 mid = 1[(gogoproto.nullable) = false]; //用户mid
+    optional int32 s1 = 2[(gogoproto.nullable) = false]; //标识1
+}
+
+message UserInfoResp
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];
+    optional UserInfoData data = 2[(gogoproto.nullable) = false];
+}
+
+message UserInfoData {
+    optional string nick = 1[(gogoproto.nullable) = false]; //昵称
+    optional string icon = 2[(gogoproto.nullable) = false]; //头像小图
+    optional string iconBig = 3[(gogoproto.nullable) = false]; //头像大图
+    optional string city = 4[(gogoproto.nullable) = false]; //城市
+    optional int32 sex = 5[(gogoproto.nullable) = false]; //性别
+    optional string sign = 6[(gogoproto.nullable) = false]; //签名
+    optional string iconId = 7[(gogoproto.nullable) = false]; //默认头像ID
+}
+
+message UserRelatedS1
+{
+    optional UserInfoResp cmd1 = 1[(gogoproto.nullable) = false];
+}
+
+message UserRelatedFlag
+{
+    repeated string s1 = 1;
+}
+
+message UserRelatedResponse
+{
+    optional UserRelatedS1 s1 = 1[(gogoproto.nullable) = false];
+    optional UserRelatedFlag flag = 2[(gogoproto.nullable) = false];
+}

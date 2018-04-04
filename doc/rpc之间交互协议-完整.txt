@@ -1,0 +1,50 @@
+
+完整的包格式：
+	len1 + WholeMsg
+	== len1 + NetHead + rpc
+	== len1 + NetHead + PROTO_RPC_STX  + head_len + body_len + head + body + PROTO_RPC_ETX
+	
+	
+	
+	说明：
+	1、len1为整包长度【二进制】
+	2、NetHead 为【二进制数据】：58位字节
+		Transfer_Head                       路由层头部
+		{                                   
+				Int  cmd;                   路由层命令字  4个字节
+				Int  trans_types;           传输类型 0=p2p,1=p2g,3=byuid, 4个字节
+				Int64  d_ser_id;            目的id   8个字节
+				Int64  d_ser_type;          目的类型  8个字节
+				Int64  s_ser_id;            源id
+				Int64  s_ser_type;          源类型		64位类型，原32位用于GameSer时gameid 2个字节不够用
+				Int64 uid;                  用户uid
+				Int64 sessionid;            消息的业务序列号，主要用于日志bug查找
+				Short extlen;               扩展部分长度 0=无扩展，其它为Ext_Head的长度
+		}
+											
+		Ext_Head                            可选扩展，目前用于组播消息
+		{                                   
+				Short groupcnt;             组id数量  1位
+				Int 64  groupid1 ;          组id1
+				...							
+				Int 64  groupidn ;          ...组idn
+		}
+	这一块要求有最小有10位字节
+	3、PROTO_RPC_STX 为固定值0x28，一个字节，开始标识符！【二进制数据】
+	4、head_len为head的长度【二进制数据】
+	5、body_len为body的长度【二进制数据】
+	6、head中包含了：（主要有：sequence、method_name）【pb数据】
+		// RPC消息头定义
+		type CRpcHead struct {
+			MtId             int32  `protobuf:"varint,1,opt,name=mt_id" json:"mt_id"`
+			Sequence         uint64 `protobuf:"varint,2,opt,name=sequence" json:"sequence"`
+			Coloring         uint32 `protobuf:"varint,3,opt,name=coloring" json:"coloring"`
+			ColorId          uint64 `protobuf:"varint,4,opt,name=color_id" json:"color_id"`
+			Err              int32  `protobuf:"varint,5,opt,name=err" json:"err"`
+			Result           int32  `protobuf:"varint,6,opt,name=result" json:"result"`
+			ErrMsg           []byte `protobuf:"bytes,7,opt,name=err_msg" json:"err_msg"`
+			MethodName       []byte `protobuf:"bytes,8,opt,name=method_name" json:"method_name"`
+			XXX_unrecognized []byte `json:"-"`
+		}
+	7、body中包含了业务端传入的请求参数【pb数据】
+	8、PROTO_RPC_ETX 为固定值0x29，一个字节，结束标识符【二进制数据】

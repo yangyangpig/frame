@@ -1,0 +1,103 @@
+1、go开发环境安装：
+	从https://golang.org/dl/ 下载安装包：
+	详细地址：https://dl.google.com/go/go1.9.2.linux-amd64.tar.gz
+	# wget https://dl.google.com/go/go1.9.2.linux-amd64.tar.gz
+	【坑】 请注意自己开发机器是32位还是64位，根据机器配置选择合适的安装包！
+	
+	# sudo cp go1.9.2.linux-amd64.tar.gz /usr/local/
+	# sudo tar -zxvf go1.9.2.linux-amd64.tar.gz
+	【坑】解压时候权限问题
+	
+	加环境变量：
+	# export PATH=$PATH:/usr/local/go/bin
+	
+	此时查看：
+	#go env
+	GOPATH="/home/JungleYe/go"
+	GOROOT="/usr/local/go"
+	
+	#go get github.com/gogo/protobuf/proto
+	#go get github.com/gogo/protobuf/jsonpb
+	#go get github.com/gogo/protobuf/protoc-gen-gogo
+	#go get github.com/gogo/protobuf/gogoproto
+	
+	
+	# export PATH=$PATH:/home/JungleYe/go/bin
+	【作用】gogoproto的插件在这里！
+	
+2、安装zmq客户端
+	1、下载安装包zeromq-4.1.6.tar.gz
+	# wget https://github.com/zeromq/zeromq4-1/archive/v4.1.6.tar.gz
+
+	2、 If you are on a 64-bit CentOS / RHEL based system: 
+	# wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+	# rpm -ivh epel-release-6-8.noarch.rpm
+	
+	# sudo yum install -y uuid-devel
+	# sudo yum install -y pkgconfig
+	# sudo yum install -y libtool
+	# sudo yum install -y gcc-c++
+	
+	2、解压安装
+	#tar zxvf zeromq-4.1.6.tar.gz
+	#cd zeromq-4.1.6
+	#./autogen.sh && ./configure && make -j 4
+	【坑】configure.ac:14: error: Autoconf version 2.62 or higher is required 报错
+	【填坑】：下载新的autoconf（需要大于等于2.62） 参考：http://blog.csdn.net/a657941877/article/details/17173193
+	
+	#make check
+	#sudo make install	（此处如果没用sudo，可能会存在权限问题）
+	#sudo ldconfig
+
+	安装完成后 /usr/local/lib下就有了libzmq的so文件了
+	
+	# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+	
+
+3、代码copy（下载）到GOPATH目录下。
+	svn checkout http://svn.oa.com:24399/flames/go
+	
+	# go install -buildmode=shared -linkshared std  标准库编译成静态库
+	# go install -buildmode=shared -linkshared framework/rpcclient/core  rpc框架编译成静态库
+	# cd /disk/data/wwwroot/go/src/PGDemo	进入业务目录
+	# go build -linkshared server.go		编译服务可执行文件
+	# go build -linkshared client.go		编译客户端可执行文件
+	
+	遇到的问题：
+	[root@VM-201-55 PGDemo]# ./server 
+	./server: error while loading shared libraries: libzmq.so.5: cannot open shared object file: No such file or directory
+	解决办法：
+	#export LD_LIBRARY_PATH=/usr/local/lib
+	
+	调查使用的命令！
+	sudo  find / -name libzmq.so.5
+	cd /etc/ld.so.conf.d
+	cd /usr/local/zeromq4/lib
+	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+	
+	问题：
+	missing or invalid package binary for binary-only package framework/rpcclient/szmq
+	解决：
+	go build -linkshared server.go
+	
+	问题：
+	/usr/bin/ld: warning: libzmq.so.5, needed by /disk/data/wwwroot/go/pkg/linux_amd64_dynlink//libframework-rpcclient-core.so, may conflict with libzmq.so.3
+	
+	问题：go build server.go时报错：
+	missing or invalid package binary for binary-only package framework/rpcclient/szmq
+
+
+4、golang包管理工具glide使用
+
+https://glide.readthedocs.io/en/latest/getting-started/
+https://github.com/Masterminds/glide
+1).安装:
+    下载二进制包
+        https://github.com/Masterminds/glide/releases
+    如linux：
+        [root@vm ~]# wget glide-v0.13.1-linux-arm64.tar.gz
+        [root@vm ~]# tar zxvf glide-v0.13.1-linux-arm64.tar.gz
+        [root@vm ~]# mv linux-amd64/glide /usr/local/bin/
+        [root@vm ~]# glide --version
+        glide version v0.13.1
+	

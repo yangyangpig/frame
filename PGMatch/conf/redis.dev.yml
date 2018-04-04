@@ -1,0 +1,18 @@
+freeTime:
+  host: "192.168.203.219"
+  port: "4602"
+matchConf:
+  host: "192.168.203.219"
+  port: "4567"
+session:
+  host: "192.168.200.21"
+  port: "7110"
+matchUser:
+  host: "192.168.203.219"
+  port: "4567"
+matchInvite:
+  host: "192.168.200.21"
+  port: "9711"
+serverConf:
+  host: "192.168.203.219"
+  port: "4567"

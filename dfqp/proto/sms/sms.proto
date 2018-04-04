@@ -1,0 +1,41 @@
+syntax="proto2";
+
+package pgSms;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+//获取短信验证码
+message GetCaptchaRequest
+{
+    optional string phone = 1[(gogoproto.nullable) = false]; //手机号
+    optional int32 type = 2[(gogoproto.nullable) = false]; //类型 1登录注册 2重置密码 3普通
+}
+
+message GetCaptchaResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];
+}
+
+//获取语音验证码
+message GetVoiceCaptchaRequest
+{
+    optional string phone = 1[(gogoproto.nullable) = false]; //手机号
+    optional int32 type = 2[(gogoproto.nullable) = false];  //类型 1登录注册 2重置密码 3普通
+}
+
+message GetVoiceCaptchaResponse
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];
+}

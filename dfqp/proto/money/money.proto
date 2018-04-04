@@ -1,0 +1,82 @@
+syntax="proto2";
+
+package pgMoney;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+//方法名 coincache.CoinCacheService.Create
+
+//用户属性
+//type
+
+enum EUserAttr
+{
+	MONEY		= 1;	//银币
+	SAFE_BOX	= 2;	//银币保险箱
+	TOTAL_MONEY = 3;	//银币总数
+	EXP			= 4;	//经验
+	LEVEL		= 5;	//等级
+	WINTIMES	= 6;	//
+	LOSTTIMES	= 7;	//
+	BLUEDIAMOND = 8;	//兑换券
+	MASTERPOINTS = 9;  	//大师分相关
+	DIAMONDEXPIRED = 10;	//
+	SILVER = 11;			//金条
+	SILVER_SAFEBOX = 12;	//金条保险箱
+	TOTAL_SILVER = 13;		//总金条数
+
+	USERATTRSIZE_END = 14;
+};
+
+message UserAttr
+{
+	optional int32 type 		= 1[(gogoproto.nullable) = false];
+	optional int64 value 		= 2[(gogoproto.nullable) = false];
+}
+
+//方法名：userserver.UserServerService.PhpCreateRecord
+//添加用户资产
+message CoinCacheCreateRequest
+{
+	optional int64    uid			= 2[(gogoproto.nullable) = false];
+	repeated UserAttr userattr	= 3[(gogoproto.nullable) = false];
+	optional string   appid      = 4[(gogoproto.nullable) = false];	//用于数据中心上报
+	optional int32    actid       = 5[(gogoproto.nullable) = false];	//用于数据中心上报
+}
+
+message CoinCacheCreateResponse
+{
+	optional int32 retcode = 1[(gogoproto.nullable) = false]; //0=成功，其它失败
+	repeated UserAttr all_attr_list = 2[(gogoproto.nullable) = false];    //全量attr列表
+}
+
+//获取用户资产
+//方法名：coincache.CoinCacheService.CoinGetUserInfo
+message CoinGetUserInfoRequest
+{
+	optional int32 uid				= 2[(gogoproto.nullable) = false];
+	optional int32 game_id 			= 3[(gogoproto.nullable) = false];	//获取指定游戏的私有数据
+
+}
+
+message CoinGetUserInfoResponse
+{
+	optional int32 uid			= 2[(gogoproto.nullable) = false];
+	optional int32 game_id		= 3[(gogoproto.nullable) = false];
+	optional int32 result 		= 4[(gogoproto.nullable) = false];
+	optional string game_buff 	= 6[(gogoproto.nullable) = false];
+	repeated UserAttr attr_list = 7[(gogoproto.nullable) = false];
+	optional string  general_field = 8[(gogoproto.nullable) = false];
+}

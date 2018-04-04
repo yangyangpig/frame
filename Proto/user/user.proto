@@ -1,0 +1,100 @@
+syntax="proto2";
+
+package pgUser;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message InsertUserRequest
+{
+    required int64 mid = 1[(gogoproto.nullable) = false];
+    required int32 app_id = 2[(gogoproto.nullable) = false];
+    required int64 reg_time = 3[(gogoproto.nullable) = false];
+    required string platform_id = 4[(gogoproto.nullable) = false];
+    required int32 platform_type = 5[(gogoproto.nullable) = false];
+    required string nick = 6[(gogoproto.nullable) = false];
+    required int32 sex = 7[(gogoproto.nullable) = false];
+    required string icon = 8[(gogoproto.nullable) = false];
+    required string icon_big = 9[(gogoproto.nullable) = false];
+    required string phone = 10[(gogoproto.nullable) = false];
+    required int64 log_time = 11[(gogoproto.nullable) = false];
+    required int64 cid = 12[(gogoproto.nullable) = false];
+}
+
+message InsertUserResponse
+{
+    required int32 status = 1[(gogoproto.nullable) = false];
+}
+
+message updateUserRequest
+{
+    required int64 mid = 1[(gogoproto.nullable) = false];
+    optional string nick = 2[(gogoproto.nullable) = false];
+    optional int32 sex = 3[(gogoproto.nullable) = false];
+    optional string icon = 4[(gogoproto.nullable) = false];
+    optional string icon_big = 5[(gogoproto.nullable) = false];
+    optional string city = 6[(gogoproto.nullable) = false];
+}
+
+message updateUserResponse
+{
+    //status 0失败 1成功
+    required int32 status = 1[(gogoproto.nullable) = false];
+}
+
+
+message getUserInfoRequest
+{
+    required int64 mid = 1[(gogoproto.nullable) = false];
+}
+
+message UserInfo {
+    required int64 mid = 1[(gogoproto.nullable) = false];
+    required int32 app_id = 2[(gogoproto.nullable) = false];
+    required int64 reg_time = 3[(gogoproto.nullable) = false];
+    required int64 login_time = 4[(gogoproto.nullable) = false];
+    required int32 status = 5[(gogoproto.nullable) = false];
+    required int64 vip_time = 6[(gogoproto.nullable) = false];
+    required int32 vip_level = 7[(gogoproto.nullable) = false];
+    required string platform_id = 8[(gogoproto.nullable) = false];
+    required int32 platform_type = 9[(gogoproto.nullable) = false];
+    required string Nick = 10[(gogoproto.nullable) = false];
+    required int32 sex = 11[(gogoproto.nullable) = false];
+    required string icon = 12[(gogoproto.nullable) = false];
+    required string icon_big = 13[(gogoproto.nullable) = false];
+    required string Hometown = 14[(gogoproto.nullable) = false];
+    required string city = 15[(gogoproto.nullable) = false];
+    required string email = 16[(gogoproto.nullable) = false];
+    required string phone = 17[(gogoproto.nullable) = false];
+    required string realname = 18[(gogoproto.nullable) = false];
+    required string idcard = 19[(gogoproto.nullable) = false];
+    required int32 org_app = 20[(gogoproto.nullable) = false];
+    required int32 org_channel = 21[(gogoproto.nullable) = false];
+    required int32 channel_id = 22[(gogoproto.nullable) = false];
+    required int64 timeout = 23[(gogoproto.nullable) = false];
+    required int64 bagvol = 24[(gogoproto.nullable) = false];
+    required int32 ispay = 25[(gogoproto.nullable) = false];
+    required int32 first_match = 26[(gogoproto.nullable) = false];
+    required int32 fast_match = 27[(gogoproto.nullable) = false];
+    required string version = 28[(gogoproto.nullable) = false];
+    required int32 is_set = 29[(gogoproto.nullable) = false];
+    required int32 partner_info = 30[(gogoproto.nullable) = false];
+}
+
+message getUserInfoResponse
+{
+    required int32 status=1[(gogoproto.nullable) = false];
+    required string msg=2[(gogoproto.nullable) = false];
+    required UserInfo data=3[(gogoproto.nullable) = false];
+}

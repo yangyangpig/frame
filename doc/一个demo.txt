@@ -1,0 +1,3 @@
+参考：
+server：http://svn.oa.com:24399/flames/go/PGDemo/server.go
+client：http://svn.oa.com:24399/flames/go/PGDemo/client.go

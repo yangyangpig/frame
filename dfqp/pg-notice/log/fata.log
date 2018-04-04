@@ -1,0 +1,2 @@
+[FATAL]2018/03/07 10:02:34.339348 netImpl.go:111: Net error!, cann't read data netstatus=NETSTATUS_CLOSE
+[DEBUG]2018/03/07 10:02:34.342361 rpc_client.go:527: continue and the err code is:1

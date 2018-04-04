@@ -1,0 +1,45 @@
+syntax="proto2";
+
+package pgLogin;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all)         = true;
+option (gogoproto.equal_all)            = true;
+option (gogoproto.verbose_equal_all)    = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all)         = true;
+option (gogoproto.populate_all)         = true;
+option (gogoproto.testgen_all)          = true;
+option (gogoproto.benchgen_all)         = true;
+option (gogoproto.marshaler_all)        = true;
+option (gogoproto.sizer_all)            = true;
+option (gogoproto.unmarshaler_all)      = true;
+
+// 登陆日志请求
+message LogInfoRequest
+{
+    optional int64 cid = 1[(gogoproto.nullable) = false]; // 公共用户ID
+}
+
+// 登陆日志响应
+message LogInfoResponse
+{
+    optional int32  status          = 1[(gogoproto.nullable) = false];  //状态 0 成功 >=1失败
+    optional string msg             = 2[(gogoproto.nullable) = false];
+    optional LogInfoData data       = 3[(gogoproto.nullable) = false];
+}
+
+message LogInfoData
+{
+    optional int64  cid             = 1[(gogoproto.nullable) = false]; // 公共用户ID
+    optional int32  first_app       = 2[(gogoproto.nullable) = false]; // 第一次登录应用ID
+    optional int32  last_app        = 3[(gogoproto.nullable) = false]; // 最后一次登录应用ID
+    optional string first_version   = 4[(gogoproto.nullable) = false]; // 第一次登录版本号
+    optional string last_version    = 5[(gogoproto.nullable) = false]; // 最后一次登录版本号
+    optional int32  reg_time        = 6[(gogoproto.nullable) = false]; // 注册时间
+    optional int32  login_time      = 7[(gogoproto.nullable) = false]; // 最后登录时间
+    optional string first_ip        = 8[(gogoproto.nullable) = false]; // 第一次登录ip
+    optional string last_ip         = 9[(gogoproto.nullable) = false]; // 最后一次登录ip
+}
+

@@ -1,0 +1,73 @@
+syntax="proto2";
+
+package pgUserRelated;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message UserRelatedRequest
+{
+    required int64 mid = 1[(gogoproto.nullable) = false];
+    optional int32 s1 = 2[(gogoproto.nullable) = false];
+    optional int32 s2 = 3[(gogoproto.nullable) = false];
+}
+
+message UserInfoResp
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];
+    optional UserInfo data = 2[(gogoproto.nullable) = false];
+}
+
+message UserInfo {
+    optional string nick = 1[(gogoproto.nullable) = false];
+    optional string icon = 2[(gogoproto.nullable) = false];
+    optional string iconBig = 3[(gogoproto.nullable) = false];
+    optional string city = 4[(gogoproto.nullable) = false];
+    optional string realName = 5[(gogoproto.nullable) = false];
+    optional int32 sex = 6[(gogoproto.nullable) = false];
+}
+
+message UserMoney {
+    optional int64 money = 1[(gogoproto.nullable) = false];
+}
+
+message UserMoneyResp
+{
+    optional int32 status = 1[(gogoproto.nullable) = false];
+    optional UserMoney data = 2[(gogoproto.nullable) = false];
+}
+
+message UserRelatedS1
+{
+    optional UserInfoResp cmd1 = 1[(gogoproto.nullable) = false];
+    optional UserMoneyResp cmd2 = 2[(gogoproto.nullable) = false];
+}
+
+message UserRelatedS2
+{
+    optional UserInfoResp cmd1 = 1[(gogoproto.nullable) = false];
+}
+
+message UserRelatedFlag
+{
+    repeated string s1 = 1;
+    repeated string s2 = 2;
+}
+
+message UserRelatedResponse
+{
+    optional UserRelatedS1 s1 = 1[(gogoproto.nullable) = false];
+    optional UserRelatedS2 s2 = 2[(gogoproto.nullable) = false];
+    optional UserRelatedFlag flag = 3[(gogoproto.nullable) = false];
+}

@@ -1,0 +1,135 @@
+syntax = "proto2";
+
+package RPCProto;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// match.lists 请求参数
+message MatchListsRequest {
+    optional uint64 cmd         = 1[(gogoproto.nullable) = false]; //保留参数
+    optional uint64 app         = 2[(gogoproto.nullable) = false]; //应用ID
+    optional uint64 game_id     = 3[(gogoproto.nullable) = false]; //会议ID
+    optional uint64 mid         = 4[(gogoproto.nullable) = false]; //用户 id
+    optional string ssid        = 5[(gogoproto.nullable) = false]; //session id
+    optional string action      = 6[(gogoproto.nullable) = false]; //请求方法名
+    optional uint32 page        = 7[(gogoproto.nullable) = false]; //页码数【如果要使用ids字段，这个字段不要传】
+    optional uint64 timestamp   = 8[(gogoproto.nullable) = false]; // 时间戳
+    optional uint32 seq         = 9[(gogoproto.nullable) = false];
+    repeated Id     ids         = 10[(gogoproto.nullable) = false]; //本地已有的比赛列表(用于减少服务器的返回数据量)
+    optional uint32 hall_version = 11[(gogoproto.nullable) = false]; // 大厅版本
+    optional uint32 area_id     = 12[(gogoproto.nullable) = false];// 地区 ID
+    optional uint32 isNew       = 13[(gogoproto.nullable) = false];
+}
+
+message Id {
+    optional uint32 type        = 1[(gogoproto.nullable) = false];
+    optional uint64 id          = 2[(gogoproto.nullable) = false];
+    optional uint64 configid    = 3[(gogoproto.nullable) = false];
+}
+
+// match.lists 返回参数
+message MatchListsResponse {
+    optional uint64 tpage           = 1[(gogoproto.nullable) = false]; //总页数
+    optional uint64 srvtime         = 2[(gogoproto.nullable) = false]; //服务器时间
+    map<uint32, List> list          = 3[(gogoproto.nullable) = false];
+    optional uint32 filter          = 4[(gogoproto.nullable) = false];
+    optional uint32 iconmax         = 5[(gogoproto.nullable) = false]; //比赛图片最大显示数
+    optional uint32 pnum            = 6[(gogoproto.nullable) = false]; //每页数量(此值16是经过计算得出，即每场比赛大概占用512byte，总大小应控制8K左右)
+    repeated uint64 apply           = 7; //已报名比赛ID
+    repeated Delete delete          = 8[(gogoproto.nullable) = false]; //需要从客户端本地删除的比赛数据
+    repeated Update update          = 9[(gogoproto.nullable) = false]; //需要从客户端本地更新的比赛数据
+    map<string,MatchIcon> match_icons  = 10[(gogoproto.nullable) = false]; //需要从客户端本地更新的比赛数据
+    map<string,uint32> sort            = 11[(gogoproto.nullable) = false]; // 代码中添加的不明确是什么(配置相关)
+}
+
+message Delete {
+    optional uint64 id          = 1[(gogoproto.nullable) = false]; //比赛ID
+    optional uint32 type        = 2[(gogoproto.nullable) = false]; //类型
+    optional uint64 configid    = 3[(gogoproto.nullable) = false]; //配置ID
+}
+
+message Update {
+    optional uint64 id          = 1[(gogoproto.nullable) = false]; //比赛ID
+    optional uint32 type        = 2[(gogoproto.nullable) = false]; //类型
+    optional uint64 configid    = 3[(gogoproto.nullable) = false]; //配置ID
+    optional uint64 applynum    = 4[(gogoproto.nullable) = false]; //参赛人数
+    optional uint64 allapplynum = 5[(gogoproto.nullable) = false]; //参赛人数(包含机器人)
+    optional uint64 stime       = 6[(gogoproto.nullable) = false]; //开始时间
+    optional uint64 etime       = 7[(gogoproto.nullable) = false]; //结束时间
+    optional uint32 status      = 8[(gogoproto.nullable) = false]; //是否报名 1为报名 0为未报名 4:报名且到达可进入比赛时间
+}
+
+message MatchIcon {
+    optional string icon    = 1[(gogoproto.nullable) = false]; //icon
+    optional string color   = 2[(gogoproto.nullable) = false]; //颜色值
+}
+
+message List {
+    optional uint64 id              = 1[(gogoproto.nullable) = false];   // 比赛ID
+    optional uint32 type            = 2[(gogoproto.nullable) = false];   // 比赛类型
+    optional string mname           = 3[(gogoproto.nullable) = false];   // 比赛名称
+    optional string micon           = 4[(gogoproto.nullable) = false];   // 比赛icon
+    optional string iconweight      = 5[(gogoproto.nullable) = false];   // 比赛icon权重，从小到大优先级
+    optional string adIcon          = 6[(gogoproto.nullable) = false];   // 720+ 广告图
+    optional string listSort        = 7[(gogoproto.nullable) = false];   // 720+ 列表排序ID。从1开始，0或空最后
+    optional uint64 stime           = 8[(gogoproto.nullable) = false];   // 比赛开始时间
+    optional uint64 etime           = 9[(gogoproto.nullable) = false];   // 比赛结束时间
+    optional uint64 gameid          = 10[(gogoproto.nullable) = false];  // 游戏ID
+    optional uint64 gamesort        = 11[(gogoproto.nullable) = false];  // 游戏ID
+    optional uint64 requestnum      = 12[(gogoproto.nullable) = false];  // 最低开赛人数
+    optional uint64 applynum        = 13[(gogoproto.nullable) = false];  // 报名人数
+    optional uint32 allowwaittime   = 14[(gogoproto.nullable) = false];  // 允许提前进入时间
+    optional string champion        = 15[(gogoproto.nullable) = false];  // 冠军奖励信息
+    repeated Fee    fee             = 16[(gogoproto.nullable) = false];  // 报名费，为空则免费报名
+    optional uint32 status          = 17[(gogoproto.nullable) = false];  // 是否报名 1为报名 0为未报名 4:报名且到达可进入比赛时间
+    optional uint32 looptype        = 18[(gogoproto.nullable) = false];  // 比赛循环周期 1:单场 2:多场
+    optional float  loopinterval    = 19[(gogoproto.nullable) = false];  // 比赛循环间隔(单位为分钟)
+    optional string loopendtime     = 20[(gogoproto.nullable) = false];  // 比赛循环截至时间(一天多场)
+    optional string rewardUrl       = 21[(gogoproto.nullable) = false];  // 比赛奖励图
+    optional string rewardDescribe  = 22[(gogoproto.nullable) = false];  // 比赛奖励描述
+    optional double thresholdType   = 23[(gogoproto.nullable) = false];  // 报名门槛类型 0：金币（银币） 1：金条
+    optional double threshold       = 24[(gogoproto.nullable) = false];  // 报名门槛 0为不设置
+    optional uint64 configid        = 25[(gogoproto.nullable) = false];  // 比赛配置ID
+    optional string matchtags       = 26[(gogoproto.nullable) = false];  // 比赛标签(用于筛选)
+    optional string matchentrycode  = 27[(gogoproto.nullable) = false];  // 比赛验证码
+    optional string matchentryinfo  = 28[(gogoproto.nullable) = false];  // 比赛验证码获取方式
+    optional string sname           = 29[(gogoproto.nullable) = false];
+    optional string gamename        = 30[(gogoproto.nullable) = false];  // 游戏名称
+    optional string advicon         = 31[(gogoproto.nullable) = false];
+    optional uint32 maxawardpool    = 32[(gogoproto.nullable) = false];
+    optional string mclabel         = 33[(gogoproto.nullable) = false];  // 比赛标签、玩法标签、场次标签
+    optional uint64 allapplynum     = 34[(gogoproto.nullable) = false];  // 参加总人数
+    optional uint32 allFreeTimes    = 35[(gogoproto.nullable) = false];  // 免费次数
+    optional uint32 freeTimes       = 36[(gogoproto.nullable) = false];  // 剩余免费次数
+    map<string, string> moneylimit  = 37[(gogoproto.nullable) = false];  // 资产限制
+    optional uint64 recommendmatchcfgid = 38[(gogoproto.nullable) = false];  // 推荐信息
+    optional uint64 endtime         = 39[(gogoproto.nullable) = false];
+    optional uint64 matchpartitions = 40[(gogoproto.nullable) = false];
+    optional uint32 isfhmatch       = 41[(gogoproto.nullable) = false];
+    optional uint64 loopintervaltime= 42[(gogoproto.nullable) = false];
+    optional uint64 firstbegintime  = 43[(gogoproto.nullable) = false];
+}
+
+//道具类型 道具数量 道具描述 优惠标签（1为开启）（特殊处理化金币和钻石。0为金币、2为钻石）
+message Fee {
+    repeated SubFee subfee = 1[(gogoproto.nullable) = false];
+}
+
+message SubFee {
+    optional uint32 type    = 1[(gogoproto.nullable) = false];
+    optional uint64 num     = 2[(gogoproto.nullable) = false];
+    optional string desc    = 3[(gogoproto.nullable) = false];
+    optional uint32 label   = 4[(gogoproto.nullable) = false];
+}

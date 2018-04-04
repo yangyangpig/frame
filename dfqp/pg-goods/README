@@ -1,0 +1,26 @@
+目录结构
+pg-goods
+    -client.go       //测试请求
+    -service.go      //main 入口
+    -install.sh      //安装文件
+    -README          //readme
+    -conf/
+    -controller/     // rpc 请求入口
+        -bag.go      // 背包
+        -common.go   // 公共
+        -goods.go    // 物品
+
+    -entity/         // 定义一些数据结构
+        -goods.go
+
+    -logic/          // 业务逻辑层
+        -bag.go
+
+    -model/          // 数据层
+        -bag.go
+        -goods.go
+        -labels.go
+
+    -service/        //app启动服务rpc 路由注册，db，cache 初始化等
+        -dispath.go
+        -init.go

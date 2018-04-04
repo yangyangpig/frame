@@ -1,0 +1,2 @@
+2018/02/08 12:16:11.204 [E] [user.go:37] cuserService.Add Fail: Error 1062: Duplicate entry '2435976' for key 'PRIMARY'
+2018/02/08 16:15:17.919 [E] [user.go:37] cuserService.Add Fail: Error 1062: Duplicate entry '2436589' for key 'PRIMARY'

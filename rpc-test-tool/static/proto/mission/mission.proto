@@ -1,0 +1,45 @@
+syntax="proto2";
+
+package pgMission;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message MissionListRequest
+{
+    required int32 app = 1[(gogoproto.nullable) = false];
+    required int32 area_id = 2[(gogoproto.nullable) = false];
+    required int64 mid = 3[(gogoproto.nullable) = false];
+    required string api_ver = 4[(gogoproto.nullable) = false];
+    required int64 hall_ver = 5[(gogoproto.nullable) = false];
+}
+
+message MissionListResData {
+    required int32 id = 1  [(gogoproto.nullable) = false];
+    required string name = 2  [(gogoproto.nullable) = false];
+    required string desc = 3  [(gogoproto.nullable) = false];
+    required string icon = 4  [(gogoproto.nullable) = false];
+    required int32  reward = 5  [(gogoproto.nullable) = false];
+    required int32  reward_typpe = 6  [(gogoproto.nullable) = false];
+    required int32  sort_order = 7  [(gogoproto.nullable) = false];
+    required string progress = 8  [(gogoproto.nullable) = false];
+    required string jump_code = 9  [(gogoproto.nullable) = false];
+    required int32  status = 10  [(gogoproto.nullable) = false];
+}
+
+message MissionListResponse {
+    required int32 status = 1[(gogoproto.nullable) = false];
+    required string msg = 2[(gogoproto.nullable) = false];
+    required MissionListResData data = 3[(gogoproto.nullable) = false];
+}

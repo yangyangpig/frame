@@ -1,0 +1,84 @@
+DEBUG2018/03/02 16:43:04.344416 rpccall.go:147: Register info is:   svrtype =1009 |svrid =1 |version = 1 |svrname =PGNotice |funcs = [GetNoticeList]|netIp =192.168.202.25|netPort = 7000
+DEBUG2018/03/02 16:43:04.345455 netImpl.go:73: 192.168.202.25:7000
+DEBUG2018/03/02 16:43:04.347691 netImpl.go:234: local addr:10.0.2.15:42192
+DEBUG2018/03/02 16:43:04.350416 rpc_client.go:561: server get a Packet cmd: 106
+DEBUG2018/03/02 16:43:04.350551 rpc_client.go:676: Register succeed!!! returncode is................. 0
+DEBUG2018/03/02 16:43:04.350668 rpc_client.go:472: registerFuncs send info :{513 0 -1 6 1 1009 1 0 0 0 [1 2]} {0xc42008aff8 0xc42008b008 [GetNoticeList] []}
+DEBUG2018/03/02 16:43:04.363462 rpc_client.go:561: server get a Packet cmd: 202
+DEBUG2018/03/02 16:43:04.367507 rpc_client.go:702: processRegisterFuncsResp succeed!!! returncode is................. 0
+DEBUG2018/03/02 16:43:34.351063 go_timer.go:189: timer is reach!2018-03-02T16:43:34+08:00
+DEBUG2018/03/02 16:43:34.351261 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:43:34.352201 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:43:34.352303 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:44:04.351902 go_timer.go:189: timer is reach!2018-03-02T16:44:04+08:00
+DEBUG2018/03/02 16:44:04.352041 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:44:04.353455 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:44:04.353550 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:44:34.352828 go_timer.go:189: timer is reach!2018-03-02T16:44:34+08:00
+DEBUG2018/03/02 16:44:34.352983 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:44:34.354408 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:44:34.354550 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:45:04.353194 go_timer.go:189: timer is reach!2018-03-02T16:45:04+08:00
+DEBUG2018/03/02 16:45:04.353326 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:45:04.355039 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:45:04.355180 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:45:34.353577 go_timer.go:189: timer is reach!2018-03-02T16:45:34+08:00
+DEBUG2018/03/02 16:45:34.353706 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:45:34.356323 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:45:34.356427 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:45:52.606036 rpccall.go:147: Register info is:   svrtype =1009 |svrid =1 |version = 1 |svrname =PGNotice |funcs = [GetNoticeList]|netIp =192.168.202.25|netPort = 7000
+DEBUG2018/03/02 16:45:52.607418 netImpl.go:73: 192.168.202.25:7000
+DEBUG2018/03/02 16:45:52.610157 netImpl.go:234: local addr:10.0.2.15:45447
+DEBUG2018/03/02 16:45:52.612817 rpc_client.go:561: server get a Packet cmd: 106
+DEBUG2018/03/02 16:45:52.612901 rpc_client.go:676: Register succeed!!! returncode is................. 0
+DEBUG2018/03/02 16:45:52.612975 rpc_client.go:472: registerFuncs send info :{513 0 -1 6 1 1009 1 0 0 0 [1 2]} {0xc42008aff8 0xc42008b008 [GetNoticeList] []}
+DEBUG2018/03/02 16:45:52.704659 rpc_client.go:561: server get a Packet cmd: 202
+DEBUG2018/03/02 16:45:52.704794 rpc_client.go:702: processRegisterFuncsResp succeed!!! returncode is................. 0
+DEBUG2018/03/02 16:46:22.613220 go_timer.go:189: timer is reach!2018-03-02T16:46:22+08:00
+DEBUG2018/03/02 16:46:22.613464 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:46:22.615608 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:46:22.615700 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:46:52.613923 go_timer.go:189: timer is reach!2018-03-02T16:46:52+08:00
+DEBUG2018/03/02 16:46:52.614156 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:46:52.615586 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:46:52.615684 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:47:22.614477 go_timer.go:189: timer is reach!2018-03-02T16:47:22+08:00
+DEBUG2018/03/02 16:47:22.614625 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:47:22.618162 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:47:22.618333 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:47:52.614949 go_timer.go:189: timer is reach!2018-03-02T16:47:52+08:00
+DEBUG2018/03/02 16:47:52.615058 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:47:52.616430 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:47:52.616527 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:48:22.615353 go_timer.go:189: timer is reach!2018-03-02T16:48:22+08:00
+DEBUG2018/03/02 16:48:22.615521 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:48:22.616970 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:48:22.617086 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:48:52.615683 go_timer.go:189: timer is reach!2018-03-02T16:48:52+08:00
+DEBUG2018/03/02 16:48:52.615836 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:48:52.617536 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:48:52.617687 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:49:22.616080 go_timer.go:189: timer is reach!2018-03-02T16:49:22+08:00
+DEBUG2018/03/02 16:49:22.616221 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:49:22.617988 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:49:22.618306 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:49:52.616850 go_timer.go:189: timer is reach!2018-03-02T16:49:52+08:00
+DEBUG2018/03/02 16:49:52.616988 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:49:52.618543 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:49:52.618793 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:50:22.617768 go_timer.go:189: timer is reach!2018-03-02T16:50:22+08:00
+DEBUG2018/03/02 16:50:22.617904 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:50:22.619850 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:50:22.619941 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:50:52.618182 go_timer.go:189: timer is reach!2018-03-02T16:50:52+08:00
+DEBUG2018/03/02 16:50:52.618423 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:50:52.620294 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:50:52.620458 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:51:22.619275 go_timer.go:189: timer is reach!2018-03-02T16:51:22+08:00
+DEBUG2018/03/02 16:51:22.619388 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:51:22.620747 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:51:22.620839 rpc_client.go:714: receive heart beat response
+DEBUG2018/03/02 16:51:52.619551 go_timer.go:189: timer is reach!2018-03-02T16:51:52+08:00
+DEBUG2018/03/02 16:51:52.619752 rpc_client.go:736: send heart request
+DEBUG2018/03/02 16:51:52.621301 rpc_client.go:561: server get a Packet cmd: 105
+DEBUG2018/03/02 16:51:52.621565 rpc_client.go:714: receive heart beat response

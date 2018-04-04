@@ -1,0 +1,50 @@
+syntax="proto2";
+
+package pgOnline;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message ReportOnlineRequest
+{
+optional int64 uid = 1[(gogoproto.nullable) = false];
+optional int32 app = 2[(gogoproto.nullable) = false];
+optional int32 hall_ver = 3[(gogoproto.nullable) = false];
+optional string apk_ver = 4[(gogoproto.nullable) = false];
+optional int32 city_app = 5[(gogoproto.nullable) = false];
+optional string ssid = 6[(gogoproto.nullable) = false];
+optional int32 forbid = 7[(gogoproto.nullable) = false];
+}
+
+message ReportOnlineResponse
+{
+optional int32 retcode = 1[(gogoproto.nullable) = false];
+}
+
+// 获取在线信息
+message GetOnlineRequest
+{
+optional int64 uid 	= 1[(gogoproto.nullable) = false];
+}
+
+message GetOnlineResponse
+{
+optional int32 	retcode 	= 1[(gogoproto.nullable) = false]; //0=成功，其它为失败
+optional int32 	app			= 2[(gogoproto.nullable) = false];
+optional int32 	hall_ver 	= 3[(gogoproto.nullable) = false];
+optional string apk_ver 	= 4[(gogoproto.nullable) = false];
+optional int32 	city_app	= 5[(gogoproto.nullable) = false];
+optional string ssid		= 6[(gogoproto.nullable) = false];
+optional string ip 			= 7[(gogoproto.nullable) = false];
+}

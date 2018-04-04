@@ -1,0 +1,1 @@
+[INFO]2018/03/19 19:40:45.112315 rpccall.go:151: Register info is:   svrtype =1997 |svrid =1 |version = 1 |svrname =pgAutotestClient |funcs = [default]|netIp =192.168.202.25|netPort = 7000

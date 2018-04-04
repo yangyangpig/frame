@@ -1,0 +1,7 @@
+后台运行：
+[JungleYe@VM-201-80 PGDemo]$ go build server.go
+[JungleYe@VM-201-80 PGDemo]$ nohup ./server &
+日志查看：
+[JungleYe@VM-201-80 PGDemo]$ tail -f default.log
+
+

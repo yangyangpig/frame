@@ -1,0 +1,29 @@
+
+syntax="proto2";
+
+package RPCProto;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+ 
+message ArithRequest
+{
+	required uint32 A1 = 1[(gogoproto.nullable) = false];
+	required uint32 A2 = 2[(gogoproto.nullable) = false]; 
+}
+ 
+message ArithResponse
+{
+	required int32 A3 = 1[(gogoproto.nullable) = false];
+}

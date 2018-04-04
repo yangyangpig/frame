@@ -1,0 +1,38 @@
+rpc日志使用说明
+
+1、日志等级使用
+日志等级分为info:1 debug:2 warn:4 fatal:8 core:16
+
+日志配置是通过在app.conf中配置logLevel，指定使用哪类日志，如果不配置，就不启动日志。如果需要启动不同的日志，需要把对应的日志等级值相加后，赋值给logLevel即可
+比如：logLevel=3，即启动了info日志和debug日志
+
+2、日志路径使用
+通过在app.conf中配置logFilePath字段指定相对路径或者绝对路径，指定日志文件存储位置,其值是一个路径，不包括文件名，如果不配置，默认在当前服务文件夹下的log文件夹下
+
+3、日志以等级划分日志名字
+如果在启动的时候服务时候，不传区分client或者server的标识时候，日志会以，等级名称-default.log命名（如debug-default.log），如果传入区分client或者server标识参数，会
+以,等级名 - 标识名.log命名,如（debug-server.log）。
+
+4、日志增加日志上报功能
+如果在app.conf配置中配置了zmqlogLevel，其划分等级和logLevel原理一样，如果不配置，默认为关闭
+日志上报分为等级划分
+info日志作为普通日志上报
+debug和warn日志作为调试日志上报
+fatal和core日志作为实时日志上报
+
+demo
+1、在app.conf下配置了logLevel=3  （启动info+debug日志等级）
+2、在app.conf下配置了logFilePath="./log/pgrpccheckdemo/"
+3、启动服务三种方式
+	./server 启动服务，不会区分client和server，会在以下路径打出以下日志
+	$GOPATH/src/PGRpcCheckDemo/log/pgrpccheckdemo
+	debug-default.log  info-default.log
+	
+	./server server 启动服务，其中server作为服务器日志标识，以这个标识区分server和client日志，会在以下路径打出以下日志
+	$GOPATH/src/PGRpcCheckDemo/log/pgrpccheckdemo
+	debug-server.log  debug-server.log
+	
+	./client client  启动服务，其中server作为服务器日志标识，以这个标识区分server和client日志，会在以下路径打出以下日志
+	$GOPATH/src/PGRpcCheckDemo/log/pgrpccheckdemo
+	debug-client.log  debug-client.log
+	

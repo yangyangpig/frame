@@ -1,0 +1,135 @@
+syntax="proto2";
+
+package pgPay;
+
+import "vendor/github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+
+//******************************* 商城配置start *************************************************//
+message ConfigRequest
+{
+required 	int64			mid = 1[(gogoproto.nullable) = false];              // 用户ID
+required 	int32			tabId = 2[(gogoproto.nullable) = false];            // tab分类(0)
+}
+
+message ConfigResponse
+{
+required 	int32 			status = 1[(gogoproto.nullable) = false];           // 请求状态
+required 	string 			msg = 2[(gogoproto.nullable) = false];              // 提示语
+optional 	ConfigRespData 	data = 3[(gogoproto.nullable) = false];             // 返回数据
+}
+message ConfigRespData
+{
+repeated	TabRespData	    tabConf = 1[(gogoproto.nullable) = false];          // tab页配置
+repeated	GoodsRespData	goods = 2[(gogoproto.nullable) = false];            // 商品配置
+optional    int32           tabId = 3[(gogoproto.nullable) = false];            // 选中的tab
+}
+
+message TabRespData
+{
+optional	int32			id = 1[(gogoproto.nullable) = false];               // tab ID
+optional    string          name = 2[(gogoproto.nullable) = false];             // tab 名称
+optional    int32           order = 3[(gogoproto.nullable) = false];            // 展示排序
+}
+
+message GoodsRespData
+{
+optional	int32			gid = 1[(gogoproto.nullable) = false];              // 商品ID
+optional	string			name = 2[(gogoproto.nullable) = false];             // 商品名称
+optional	string			icon = 3[(gogoproto.nullable) = false];             // 商品图片
+optional	int32			order = 4[(gogoproto.nullable) = false];            // 商品排序
+repeated    DescRespData    desc = 5[(gogoproto.nullable) = false];             // 描述信息，只做显示
+repeated	PayRespData     pay = 6[(gogoproto.nullable) = false];              // 消耗
+optional	int32			limitNum = 7[(gogoproto.nullable) = false];         // 已购买数量，限额商品才有该属性。-1为不限购
+optional 	int32			limitTotal = 8[(gogoproto.nullable) = false];       // 当日限购总数量，-1为不限购
+optional	int32			sellId = 9[(gogoproto.nullable) = false];          // 销售物品id，0：银币 1：金条
+optional	int32			sellNum = 10[(gogoproto.nullable) = false];         // 销售物品数量
+}
+// 购买（兑换）消耗的物品
+message PayRespData
+{
+optional	int32           payId = 1[(gogoproto.nullable) = false];            // 物品ID (-1为人民币,>=0为物品id)
+optional	float           oldPayNum = 2[(gogoproto.nullable) = false];        // 原价物品消耗数量
+optional	float           payNum = 3[(gogoproto.nullable) = false];           // 实际物品消耗数量
+optional    string          pmode = 4[(gogoproto.nullable) = false];            // 支付方式 99;128;
+}
+// 获得的物品
+message DescRespData
+{
+optional    int32           type = 1[(gogoproto.nullable) = false];	            // 赠送类型：1-首充赠送 2-加增 3-打折 4-热卖
+optional	string          flagIcon = 2[(gogoproto.nullable) = false];	        // 首充、打折、加赠图片
+optional    string          desc = 3[(gogoproto.nullable) = false];	            // 商品描述
+repeated	GiftRespDetail  detail = 4[(gogoproto.nullable) = false];	        // 物品ID
+optional    int32           dorder = 5[(gogoproto.nullable) = false];	        // 描述优先级排序
+}
+message GiftRespDetail
+{
+optional	int32           goodsId = 1[(gogoproto.nullable) = false];	        // 物品ID
+optional	int32           goodsNum = 2[(gogoproto.nullable) = false];	        // 物品数量
+}
+//******************************* 商城配置end *************************************************//
+//******************************* 下单start *************************************************//
+message OrderRequest
+{
+optional 	int64		    mid = 1[(gogoproto.nullable) = false];		        // 用户ID
+optional	int32		    pmode = 2[(gogoproto.nullable) = false];	        // 支付方式
+optional	float		    price = 3[(gogoproto.nullable) = false];            // 价格
+optional	int32		    number = 4[(gogoproto.nullable) = false];           // 商品数量
+optional	int32		    gid = 5[(gogoproto.nullable) = false];              // 商品ID
+optional	int32		    tabId = 6[(gogoproto.nullable) = false];            // 标签Id
+}
+message OrderResponse
+{
+required 	int32 		    status = 1[(gogoproto.nullable) = false];           // 请求状态
+required 	string 		    msg = 2[(gogoproto.nullable) = false];		        // 提示语
+optional 	OrderInfo 	    data = 3[(gogoproto.nullable) = false];             // 返回数据
+}
+message OrderInfo
+{
+optional	string 		    order = 1[(gogoproto.nullable) = false];            // 第三方平台订单号
+optional    int32           gid = 2[(gogoproto.nullable) = false];              // 商品ID
+optional	float 		    pamount = 3[(gogoproto.nullable) = false];          // 商品价格
+optional    string          pname = 4[(gogoproto.nullable) = false];            // 商品名称
+optional    int32           mid = 5[(gogoproto.nullable) = false];              // 用户ID
+optional    string          ext = 6[(gogoproto.nullable) = false];              // 扩展信息，每种支付方式返回的参数都不一样（）
+optional	string 		    pid = 7[(gogoproto.nullable) = false];              // 支付中心订单号
+optional    int32           pmode = 8[(gogoproto.nullable) = false];            // 支付方式
+}
+//******************************* 下单end *************************************************//
+//******************************* 通知发货start *******************************************//
+message ReportRequest
+{
+required 	string			pid = 1[(gogoproto.nullable) = false];		        // 支付中心的订单号
+required 	string			content = 2[(gogoproto.nullable) = false];	        // 通知发货必要参数
+}
+message ReportResponse
+{
+required 	int32 		    status = 1[(gogoproto.nullable) = false];           // 请求状态
+required 	string 		    msg = 2[(gogoproto.nullable) = false];              // 提示语
+required 	string 		    data = 3[(gogoproto.nullable) = false];             // 返回数据(json)
+}
+//******************************* 通知发货end *******************************************//
+//******************************* 通知发货start *******************************************//
+message SendMoneyRequest
+{
+required 	string			content = 1[(gogoproto.nullable) = false];		    // 由http服务转发过来的请求，支付中心的订单号
+}
+message SendMoneyResponse
+{
+required 	int32 		    status = 1[(gogoproto.nullable) = false];           // 请求状态
+required 	string 		    msg = 2[(gogoproto.nullable) = false];              // 提示语
+required 	string 		    data = 3[(gogoproto.nullable) = false];             // 返回数据(json)
+}
+//******************************* 通知发货end *******************************************//

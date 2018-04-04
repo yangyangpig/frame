@@ -1,0 +1,11 @@
+1、zmq的安装：
+https://github.com/zeromq/zeromq4-1/releases/download/v4.1.6/zeromq-4.1.6.tar.gz
+1、下载安装包zeromq-4.1.6.tar.gz
+2、解压tar zxvf zeromq-4.1.6.tar.gz
+cd zeromq-4.1.6
+./autogen.sh && ./configure && make -j 4
+make check
+sudo make install	（此处如果没用sudo，可能会存在权限问题）
+sudo ldconfig
+
+安装完成后 /usr/local/lib下就有了libzmq的so文件了
